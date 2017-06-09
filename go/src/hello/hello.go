@@ -18,8 +18,9 @@ func subtract1(x, y int) int {
 	return x - y
 }
 
-func product(x int, y int) int {
-	return x * y
+func product(x int, y int) (z int) {
+	z = x + y
+	return
 }
 
 func swap(x, y string) (string, string) {
@@ -33,6 +34,8 @@ func swapAdd(x, y int) (int, int) {
 func three(x, y, z int) (int, int, int) {
 	return z, y, x
 }
+
+var packageVar bool;
 
 func main() {
 	fmt.Printf("hello, world\n")
