@@ -14,4 +14,10 @@ func main(){
 
 	b := make([]int, 5, 5)
 	fmt.Println(b)
+
+	var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
+
+	for i := range pow {
+		fmt.Println(i)
+	}
 }
