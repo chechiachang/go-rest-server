@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"math"
+	"runtime"
+	"time"
 )
 
 func Sqrt(x float64) float64{
@@ -28,4 +30,45 @@ func main(){
 	fmt.Println(Sqrt(2))
 
 	fmt.Println(Sqrt(10000))
+}
+
+func printOS(){
+	switch os:= runtime.GOOS; os {
+	case "darwan":
+	case "linux":
+	default:
+		fmt.Print("%s", os)
+	}
+}
+
+func printDay(){
+	today := time.Now().Weekday()
+	switch time.Saturday {
+	case today + 0:
+	case today + 1:
+	case today + 2:
+	default:
+
+	}
+}
+
+func printTime(){
+	t := time.Now()
+	switch{
+	case t.Hour() < 12:
+	case t.Hour() < 17:
+	default:
+
+	}
+}
+
+func deferFunc(){
+	defer fmt.Println("world")
+	fmt.Println("hello")
+
+	for i := 0; i < 10; i ++{
+		defer fmt.Println(i)
+	}
+
+	fmt.Println("done")
 }
