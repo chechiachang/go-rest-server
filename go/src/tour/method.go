@@ -21,4 +21,6 @@ func main(){
 	v := Vertex{3,2}
 	fmt.Println(v.Abs())
 	fmt.Println(Abs(v))
+
+	fmt.Println(Vertex{3, 4}.Abs())
 }
