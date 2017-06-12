@@ -25,3 +25,14 @@ func main(){
 		fmt.Println("unknown")
 	}
 }
+
+func do(i interface{}){
+	switch v := i.(type){
+	case int:
+		fmt.Println("int")
+	case string:
+		fmt.Println("string")
+	default:
+		fmt.Printf("nothing %T", v)
+	}
+}
