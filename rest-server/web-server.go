@@ -9,21 +9,23 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/gocql/gocql"
+	"github.com/gorilla/mux"
 )
 
 func main(){
-	//getProduct()
-
-	getCassandra()
-
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request){
-		r.ParseForm()
-		fmt.Fprint(w, "Hello, %q", html.EscapeString(r.URL.Path))
-	})
-
+	router := mux.NewRouter().StrictSlash(true)
+	router.HandleFunc("/", Index)
+	router.HandleFunc("/todos", TodoIndex)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
+func Index(w http.ResponseWriter, r *http.Request){
+	fmt.Fprintln(w, "Hello, %q", html.EscapeString(r.URL.Path))
+}
+
+func TodoIndex(w http.ResponseWriter, r *http.Request){
+	fmt.Fprintln(w, "Todo")
+}
 
 type Product struct{
 	gorm.Model
@@ -31,7 +33,7 @@ type Product struct{
 	Price uint
 }
 
-func getProduct(){
+func testMySQL(){
 	db, err := gorm.Open("mysql", "root:p$%57p@tcp(localhost:3306)/test?charset=utf8&parseTime=True")
 	if err != nil {
 		panic("failed to connect database")
@@ -51,7 +53,13 @@ func getProduct(){
 	db.Delete(&product)
 }
 
-func getCassandra(){
+type Tweet struct{
+	timeline string
+	id string
+	text string
+}
+
+func testCassandra(){
 	cluster := gocql.NewCluster("172.17.0.3")
 	cluster.Keyspace = "example"
 	// create keyspace example with replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
