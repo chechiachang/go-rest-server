@@ -52,9 +52,11 @@ func getProduct(){
 }
 
 func getCassandra(){
-	cluster := gocql.NewCluster("localhost")
+	cluster := gocql.NewCluster("172.17.0.3")
 	cluster.Keyspace = "example"
-	cluster.Consistency = gocql.Quorum
+	// create keyspace example with replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+	// create table example.tweet ( timeline text, id timeuuid, text text, primary key(timeline, id));
+	cluster.Consistency = gocql.One
 
 	session, _ := cluster.CreateSession()
 	defer session.Close()
