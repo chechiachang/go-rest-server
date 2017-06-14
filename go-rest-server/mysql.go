@@ -21,3 +21,19 @@ func testMySQL(){
 
 	db.Delete(&product)
 }
+
+func getUser(id string) User{
+	db, err := gorm.Open("mysql", "root:p$%57p@tcp(localhost:3306)/test?charset=utf8&parseTime=True")
+	if err != nil {
+		panic("failed to connect database")
+	}
+	defer db.Close()
+
+	db.AutoMigrate(&User{})
+	db.Create(&User{Id: "1", Name: "name"})
+
+	var user User
+	db.Find(&user, "id = ?", id)
+
+	return user
+}

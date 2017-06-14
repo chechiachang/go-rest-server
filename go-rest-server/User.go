@@ -18,9 +18,12 @@ func (u UserResource) findUser(request *restful.Request, response *restful.Respo
 	id := request.PathParameter("user-id")
 
 	// mock User
-	u.users[id] = User{"1", "name"}
+	// u.users[id] = User{"1", "name"}
+	 usr := u.users[id]
 
-	usr := u.users[id]
+	testMySQL()
+	//usr := getUser(id)
+
 	if len(usr.Id) == 0 {
 		response.AddHeader("Content-Type", "text/plain")
 		response.WriteErrorString(http.StatusNotFound, "404: User could not be found.")
