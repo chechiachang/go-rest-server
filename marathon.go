@@ -31,31 +31,33 @@ func createClient(){
 		log.Fatalf("Failed to create a client for marathon, error: %s", err)
 	}
 
-	applications, err := client.Applications()
-	if err != nil {
-		log.Fatalf("Failed to list applications")
-	}
+	client.Info()
 
-	log.Printf("Found %d applications running", len(applications.Apps))
-	for _, application := range applications.Apps {
-		log.Printf("Application: %s", application)
-		details, err := client.Application(application.ID)
-		if err != nil{
-			log.Fatal(err)
-		}
-
-		if details.Tasks != nil && len(details.Tasks) > 0 {
-			for _, task := range details.Tasks {
-				log.Printf("task: %s", task)
-			}
-			// check the health of the application
-			health, err := client.ApplicationOK(details.ID)
-			if err != nil {
-				log.Fatal(err)
-			}
-			log.Printf("Application: %s, healthy: %t", details.ID, health)
-		}
-	}
+	//applications, err := client.Applications()
+	//if err != nil {
+	//	log.Fatalf("Failed to list applications")
+	//}
+	//
+	//log.Printf("Found %d applications running", len(applications.Apps))
+	//for _, application := range applications.Apps {
+	//	log.Printf("Application: %s", application)
+	//	details, err := client.Application(application.ID)
+	//	if err != nil{
+	//		log.Fatal(err)
+	//	}
+	//
+	//	if details.Tasks != nil && len(details.Tasks) > 0 {
+	//		for _, task := range details.Tasks {
+	//			log.Printf("task: %s", task)
+	//		}
+	//		// check the health of the application
+	//		health, err := client.ApplicationOK(details.ID)
+	//		if err != nil {
+	//			log.Fatal(err)
+	//		}
+	//		log.Printf("Application: %s, healthy: %t", details.ID, health)
+	//	}
+	//}
 }
 
 func createApplication(){
